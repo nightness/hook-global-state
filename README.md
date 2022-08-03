@@ -1,5 +1,3 @@
-# hook-global-state
-
 ### Install
 ---
 ```
@@ -9,8 +7,6 @@ or
 ```
 yarn add hook-global-state
 ```
-
-
 ### Example
 ---
 ```
