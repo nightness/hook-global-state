@@ -1,0 +1,12 @@
+{
+  "name": "hook-global-state",
+  "version": "1.0.0",
+  "description": "A very streamlined global state management for React",
+  "main": "index.js",
+  "author": "Nightness",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "react": "*"
+  }
+}
