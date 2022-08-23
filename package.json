@@ -1,6 +1,6 @@
 {
   "name": "hook-global-state",
-  "version": "1.0.1",
+  "version": "1.0.10",
   "description": "A very streamlined global state management for React",
   "main": "index.js",
   "author": "Nightness",
