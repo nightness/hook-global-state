@@ -59,7 +59,7 @@ export const useGlobalMemo = (
   deps,
   forceUpdate = false
 ) => {
-  console.log("useGlobalMemo", name, initialValue, deps, forceUpdate);
+  // console.log("useGlobalMemo", name, initialValue, deps, forceUpdate);
   return useMemo(
     forceUpdate
       ? (globalObjects[name] = initialValue)
@@ -74,7 +74,7 @@ export const useGlobalCallback = (
   deps,
   forceUpdate = false
 ) => {
-  console.log("useGlobalCallback", name, initialValue, deps, forceUpdate);
+  // console.log("useGlobalCallback", name, initialValue, deps, forceUpdate);
   return useCallback(
     forceUpdate
       ? (globalObjects[name] = initialValue)
