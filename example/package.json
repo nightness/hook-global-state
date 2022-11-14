@@ -11,9 +11,9 @@
   "dependencies": {
     "expo": "~46.0.9",
     "expo-status-bar": "~1.4.0",
-    "hook-global-state": "^1.0.11",
+    "hook-global-state": "^1.0.16",
     "react": "18.0.0",
-    "react-native": "0.69.4"
+    "react-native": "0.69.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

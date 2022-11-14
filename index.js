@@ -6,13 +6,13 @@ const allState = {};
 const listeners = {};
 
 const set = (name, value) => {
-  const newValue = value;
+  let newValue = value;
   if (typeof value === "function") {
     // Get the new state by passing current state to the set state function
     newValue = value(allState[name]);
   }
   allState[name] = newValue;
-  listeners[name].forEach((listener) => {
+  listeners[name]?.forEach((listener) => {
     listener.callback(value);
   });
 };
@@ -32,14 +32,12 @@ const unsubscribe = (name, listener) => {
 };
 
 // The second argument is ignored after the singleton is set, to change the singleton use it's setter
-export const useGlobalState = (name, initialValue, forceUpdate) => {
+export const useGlobalState = (name, initialValue) => {
   const [state, setState] = useState(
-    forceUpdate
-      ? (allState[name] = initialValue)
-      : allState[name] ?? (allState[name] = initialValue)
+    allState[name] ?? (allState[name] = initialValue)
   );
 
-  const setter = useCallback((value) => set(name, value), []);
+  const setter = useCallback((value) => set(name, value), [name]);
 
   useEffect(() => {
     subscribe(name, setState);
@@ -51,32 +49,12 @@ export const useGlobalState = (name, initialValue, forceUpdate) => {
   return [state, setter];
 };
 
-export const useGlobalMemo = (
-  name,
-  initialValue,
-  deps,
-  forceUpdate = false
-) => {
-  // console.log("useGlobalMemo", name, initialValue, deps, forceUpdate);
-  return useMemo(
-    forceUpdate
-      ? (allState[name] = initialValue)
-      : allState[name] ?? (allState[name] = initialValue),
-    deps
-  );
-};
+// export const useGlobalMemo = (name, initialValue, deps) => {
+//   // console.log("useGlobalMemo", name, initialValue, deps, forceUpdate);
+//   return useMemo(allState[name] ?? (allState[name] = initialValue), deps);
+// };
 
-export const useGlobalCallback = (
-  name,
-  initialValue,
-  deps,
-  forceUpdate = false
-) => {
-  // console.log("useGlobalCallback", name, initialValue, deps, forceUpdate);
-  return useCallback(
-    forceUpdate
-      ? (allState[name] = initialValue)
-      : allState[name] ?? (allState[name] = initialValue),
-    deps
-  );
-};
+// export const useGlobalCallback = (name, initialValue, deps) => {
+//   // console.log("useGlobalCallback", name, initialValue, deps, forceUpdate);
+//   return useCallback(allState[name] ?? (allState[name] = initialValue), deps);
+// };

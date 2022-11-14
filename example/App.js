@@ -1,16 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import SubComponent from './SubComponent';
-import { useGlobalCallback } from 'hook-global-state'
+import { StatusBar } from "expo-status-bar";
+import { Button, StyleSheet, Text, View } from "react-native";
+import { useGlobalCallback, useGlobalState } from "hook-global-state";
+import { useEffect } from "react";
 
-export default function App() {
-  const callback = useGlobalCallback('callback', () => {
-    alert('ABC');
-  })
+const TopComponent = () => {
+  const callback = useGlobalCallback("callback");
+  const [count, setCount] = useGlobalState("count");
 
   return (
+    <>
+      <Button title="Add to Count" onPress={setCount((c) => c + 1)} />
+      <Button title="Alert with count" onPress={() => callback(count)} />
+    </>
+  );
+};
+
+const BottomComponent = () => {
+  const callback = useGlobalCallback("callback");
+  const [count, setCount] = useGlobalState("count");
+
+  return (
+    <Button
+      title="ABC"
+      onPress={() => {
+        callback();
+      }}
+    />
+  );
+};
+
+export default function App() {
+  return (
     <View style={styles.container}>
-      <SubComponent />
+      <TopComponent />
+      <BottomComponent />
       <StatusBar style="auto" />
     </View>
   );
@@ -19,8 +42,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
