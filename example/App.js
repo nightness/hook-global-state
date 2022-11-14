@@ -1,31 +1,32 @@
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Text, View } from "react-native";
-import { useGlobalCallback, useGlobalState } from "hook-global-state";
-import { useEffect } from "react";
+import { useGlobalState } from "hook-global-state";
 
 const TopComponent = () => {
-  const callback = useGlobalCallback("callback");
-  const [count, setCount] = useGlobalState("count");
+  const [count, setCount] = useGlobalState("count", 0);
 
   return (
     <>
-      <Button title="Add to Count" onPress={setCount((c) => c + 1)} />
-      <Button title="Alert with count" onPress={() => callback(count)} />
+      <Button title="Add to Count" onPress={() => setCount((c) => c + 1)} />
+      <Button
+        title="Alert with count"
+        onPress={() => alert(`count = ${count}`)}
+      />
     </>
   );
 };
 
 const BottomComponent = () => {
-  const callback = useGlobalCallback("callback");
-  const [count, setCount] = useGlobalState("count");
+  const [count, setCount] = useGlobalState("count", 0);
 
   return (
-    <Button
-      title="ABC"
-      onPress={() => {
-        callback();
-      }}
-    />
+    <>
+      <Button title="Add to Count" onPress={() => setCount((c) => c + 1)} />
+      <Button
+        title="Alert with count"
+        onPress={() => alert(`count = ${count}`)}
+      />
+    </>
   );
 };
 
