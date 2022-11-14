@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { useGlobalState } from "hook-global-state";
 
 const TopComponent = () => {
@@ -37,6 +37,13 @@ const BottomComponent = () => {
 export default function App() {
   return (
     <View style={styles.container}>
+      <Text
+        style={{
+          textAlign: "center",
+        }}
+      >
+        Both top and bottom are siblings with a shared global state
+      </Text>
       <TopComponent />
       <BottomComponent />
       <StatusBar style="auto" />
@@ -47,6 +54,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 50,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
