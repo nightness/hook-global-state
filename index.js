@@ -31,7 +31,7 @@ const unsubscribe = (name, listener) => {
   );
 };
 
-// The second argument is ignored after the singleton is set, to change the singleton use it's setter
+// The second argument is ignored after the initialState is already set
 export const useGlobalState = (name, initialValue) => {
   const [state, setState] = useState(
     allState[name] ?? (allState[name] = initialValue)
@@ -48,13 +48,3 @@ export const useGlobalState = (name, initialValue) => {
 
   return [state, setter];
 };
-
-// export const useGlobalMemo = (name, initialValue, deps) => {
-//   // console.log("useGlobalMemo", name, initialValue, deps, forceUpdate);
-//   return useMemo(allState[name] ?? (allState[name] = initialValue), deps);
-// };
-
-// export const useGlobalCallback = (name, initialValue, deps) => {
-//   // console.log("useGlobalCallback", name, initialValue, deps, forceUpdate);
-//   return useCallback(allState[name] ?? (allState[name] = initialValue), deps);
-// };
